@@ -1,0 +1,119 @@
+#loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* Transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20; /* Ensure it's above all content */
+    font-family: "Poppins", sans-serif;
+    color: white;
+}
+/* Add smooth transition to flag, year, and name elements */
+#left-flag,
+#right-flag,
+#left-year,
+#right-year,
+#left-name,
+#right-name {
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+/* You can adjust the transition based on your requirements */
+
+/* Apply Poppins font to the whole body */
+body {
+    font-family: "Poppins", sans-serif;
+    overflow: hidden;
+}
+
+/* Ensuring that the font-poppins class is applied to any other text you want */
+.font-poppins {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Fade-in down animation */
+/* Fade-in down animation for big devices */
+.fade-in-down {
+    animation: fadeInDown 1s;
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) translateX(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+    }
+}
+
+/* Fade-in down animation for small and medium devices */
+@media (max-width: 768px) {
+    .fade-in-down {
+        animation: fadeInDownMd 1s;
+    }
+
+    @keyframes fadeInDownMd {
+        0% {
+            opacity: 0;
+            transform: translateY(-20px) translateX(-50%);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) translateX(-50%);
+        }
+    }
+}
+
+.fade-in-down-score {
+    animation: fadeInDownScore 1s;
+}
+
+@keyframes fadeInDownScore {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) translateX(-50%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateX(-50%);
+    }
+}
+
+/* Fade-in from left animation for left box */
+.fade-in-from-left {
+    animation: fadeInFromLeft 0.5s;
+}
+
+@keyframes fadeInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade-in from right animation for right box */
+.fade-in-from-right {
+    animation: fadeInFromRight 0.5s;
+}
+@keyframes fadeInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}

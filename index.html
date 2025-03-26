@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Population Game</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body class="bg-black">
+        <div
+            id="loading-screen"
+            class="absolute inset-0 bg-black bg-opacity-50 flex justify-center items-center z-20"
+        >
+            <div class="text-white font-poppins text-3xl font-bold">
+                Loading...
+            </div>
+        </div>
+
+        <div class="flex h-screen flex-wrap relative">
+            <!-- New div with text above all content -->
+            <div
+                class="absolute md:top-0 md:left-0 top-1/2 left-1/2 md:-translate-x-0 md:-translate-y-0 -translate-x-1/2 -translate-y-1/2 w-full z-10 text-center fade-in-down"
+            >
+                <div
+                    id="lessOrMore"
+                    class="bg-green-500 p-2 text-white md:text-3xl sm:text-2xl text-xl font-bold md:my-4 font-poppins"
+                >
+                    Which Country has More Population?
+                </div>
+            </div>
+            <div
+                class="absolute md:top-0 md:left-1/2 top-1/2 left-1/2 -translate-x-1/2 z-10 mt-6 sm:mt-4 sm:mb-4 md:mt-16 md:mb-4 fade-in-down-score"
+            >
+                <div
+                    id="points"
+                    class="bg-red-500 px-2 sm:px-2 text-white md:text-2xl sm:text-xl text-lg font-bold w-full md:w-full"
+                >
+                    POINTS: 0
+                </div>
+            </div>
+            <!-- Existing content -->
+            <div
+                id="left"
+                class="h-[50%] w-full bg-black md:h-screen md:w-1/2 lg:w-1/2 relative cursor-pointer border-4 border-transparent hover:border-green-500 fade-in-from-left"
+            >
+                <img
+                    id="left-flag"
+                    src="https://flagcdn.com/w320/ug.png"
+                    class="h-full w-full object-cover"
+                    alt="Image description"
+                />
+                <div
+                    class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-70 flex justify-center items-center text-white flex flex-col gap-3"
+                >
+                    <div
+                        id="left-year"
+                        class="text-center bg-violet-500 sm:px-4 sm:py-1 px-2 py-1"
+                    >
+                        <h2 class="sm:text-2xl text-xl font-bold">In 1999</h2>
+                    </div>
+                    <div class="text-center">
+                        <h2 id="left-name" class="text-2xl font-bold">
+                            Uganda
+                        </h2>
+                        <p id="left-abbr" class="text-xl">UG</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                id="right"
+                class="h-[50%] w-full bg-black md:h-screen md:w-1/2 lg:w-1/2 relative cursor-pointer border-4 border-transparent hover:border-green-500 fade-in-from-right"
+            >
+                <img
+                    id="right-flag"
+                    src="https://flagcdn.com/w320/ca.png"
+                    class="h-full w-full object-cover"
+                    alt="Image description"
+                />
+                <div
+                    class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-70 flex justify-center items-center text-white flex flex-col gap-3"
+                >
+                    <div
+                        id="right-year"
+                        class="text-center bg-violet-500 sm:px-4 sm:py-1 px-2 py-1"
+                    >
+                        <h2 class="sm:text-2xl text-xl font-bold">In 1999</h2>
+                    </div>
+                    <div class="text-center">
+                        <h2 id="right-name" class="text-2xl font-bold">
+                            Canada
+                        </h2>
+                        <p id="right-abbr" class="text-xl">CA</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                id="lossModal"
+                class="hidden absolute inset-0 bg-black bg-opacity-70 flex justify-center items-center z-30"
+            >
+                <div
+                    class="bg-red-400 p-8 rounded-lg text-center text-white w-4/5 sm:w-1/3"
+                >
+                    <h2 class="text-3xl font-bold">You Lost!</h2>
+                    <p class="text-xl mt-4">
+                        You scored <span id="finalScore">0</span> points!
+                    </p>
+                    <button
+                        id="closeModal"
+                        class="mt-6 bg-green-500 px-4 py-2 rounded-lg text-xl"
+                    >
+                        Try Again
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="./script.js"></script>
+    </body>
+</html>
