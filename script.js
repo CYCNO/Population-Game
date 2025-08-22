@@ -1,7 +1,9 @@
-console.log("clicked");
-
 let countriesDataCache = null;
 let populationDataCache = null;
+
+const countData = window.flagData;
+
+const popData = window.populationData;
 
 function updateCard(cardId, name, flagSrc, year) {
   // Get the flag image element
@@ -30,38 +32,6 @@ function updateCard(cardId, name, flagSrc, year) {
     .toUpperCase();
 }
 
-async function fetchCountriesData() {
-  if (countriesDataCache) {
-    return countriesDataCache;
-  }
-
-  try {
-    const response = await fetch("https://restcountries.com/v3.1/all");
-    countriesDataCache = await response.json();
-    return countriesDataCache;
-  } catch (error) {
-    console.error("Error fetching countries data:", error.message);
-    return null;
-  }
-}
-
-async function fetchPopulationData() {
-  if (populationDataCache) {
-    return populationDataCache;
-  }
-
-  try {
-    const response = await fetch(
-      "https://countriesnow.space/api/v0.1/countries/population",
-    );
-    populationDataCache = (await response.json()).data;
-    return populationDataCache;
-  } catch (error) {
-    console.error("Error fetching population data:", error.message);
-    return null;
-  }
-}
-
 function getCountryFlag(countriesData, countryName) {
   // Find the country in the data
   const country = countriesData.find(
@@ -79,12 +49,15 @@ function getCountryFlag(countriesData, countryName) {
 async function getRandomPopulationWithFlag() {
   try {
     // Fetch the population and countries data
-    const populationData = await fetchPopulationData();
-    const countriesData = await fetchCountriesData();
+    const populationData = popData;
+    const countriesData = countData;
 
     // Get a random country from the population data
     const randomCountry =
-      populationData[Math.floor(Math.random() * populationData.length)];
+      populationData.data[
+        Math.floor(Math.random() * populationData.data.length)
+      ];
+
     const countryName = randomCountry.country;
 
     // Get a random year and population
@@ -99,7 +72,7 @@ async function getRandomPopulationWithFlag() {
     const flagUrl = getCountryFlag(countriesData, countryName);
 
     if (flagUrl === 0) {
-      console.log("Flag not found, trying again...");
+      // Flag not found, trying again...
       return await getRandomPopulationWithFlag(); // Recursively call the function
     }
 
@@ -274,5 +247,5 @@ initialize().then(main);
 closeModalButton.addEventListener("click", function () {
   lossModal.classList.add("hidden");
   points = 0;
-  pointsDisplay.textContent = `POINTS: ${points}`;
+  pointsDiv.textContent = `POINTS: ${points}`;
 });

@@ -63,17 +63,18 @@ body {
     @keyframes fadeInDownMd {
         0% {
             opacity: 0;
-            transform: translateY(-20px) translateX(-50%);
+            transform: translateY(-20px) translateX(0%);
         }
         100% {
             opacity: 1;
-            transform: translateY(0) translateX(-50%);
+            transform: translateY(0) translateX(0%);
         }
     }
 }
 
 .fade-in-down-score {
-    animation: fadeInDownScore 1s;
+    transform-origin: top center;
+    animation-fill-mode: forwards; /* Keep final state */
 }
 
 @keyframes fadeInDownScore {
