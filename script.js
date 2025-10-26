@@ -142,7 +142,8 @@ function hideLoadingScreen() {
 let gameMode = getRandomGameMode(); // Randomly select the initial game mode
 
 function more() {
-  lessormore.innerText = "Which Country Has More Population";
+  lessormore.innerHTML = 'Which Country Has <span class="text-red-600">More</span> Population';
+
   gameMode = "more";
 
   // Change text color to green for "more"
@@ -159,7 +160,7 @@ function more() {
 }
 
 function less() {
-  lessormore.innerText = "Which Country Has Less Population";
+  lessormore.innerHTML = 'Which Country Has <span class="text-blue-700">Less</span> Population';
   gameMode = "less";
 
   // Change text color to red for "less"
@@ -181,6 +182,11 @@ function getRandomGameMode() {
 
 function main() {
   var points = 0;
+  if (gameMode == "more") {
+    more()
+  } else {
+    less()
+  }
 
   leftDiv.addEventListener("click", () => {
     if (
