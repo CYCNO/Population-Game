@@ -11,6 +11,9 @@ Bug Fixes in (0.0.2)
 Bug Need To Be Fix:
 - [ ] Label dont properly allign to center when running the website for the first time on smaller devices
 
+Future Work:
+- [ ] Need entire rewrite of js side for optimize and organize the code
+
 if you got any issue or suggestion, open an issue.
 
 Thanks to apis
