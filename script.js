@@ -141,15 +141,21 @@ function hideLoadingScreen() {
 
 let gameMode = getRandomGameMode(); // Randomly select the initial game mode
 
+const colors = ["blue","green"] // 0 identify less color theme, 1 identify more color theme
+
 function more() {
-  lessormore.innerHTML = 'Which Country Has <span class="text-red-600">More</span> Population';
+  lessormore.innerHTML = 'Which Country Has More Population';
 
   gameMode = "more";
 
-  // Change text color to green for "more"
-  lessormore.classList.remove("bg-red-500"); // Remove the red color (if any)
-  lessormore.classList.add("bg-green-500"); // Add the green color
+  lessormore.classList.remove(`bg-${colors[0]}-500`); 
+  lessormore.classList.add(`bg-${colors[1]}-500`); 
+  // change the border
+  leftDiv.classList.remove(`hover:border-${colors[0]}-500`)
+  leftDiv.classList.add(`hover:border-${colors[1]}-500`)
 
+  rightDiv.classList.remove(`hover:border-${colors[0]}-500`)
+  rightDiv.classList.add(`hover:border-${colors[1]}-500`)
   // Trigger animation on text
   lessormore.classList.add("fade-in-down");
 
@@ -160,17 +166,20 @@ function more() {
 }
 
 function less() {
-  lessormore.innerHTML = 'Which Country Has <span class="text-blue-700">Less</span> Population';
+  lessormore.innerHTML = 'Which Country Has Less Population';
   gameMode = "less";
 
-  // Change text color to red for "less"
-  lessormore.classList.remove("bg-green-500"); // Remove the green color (if any)
-  lessormore.classList.add("bg-green-500"); // Add the red color
+  lessormore.classList.remove(`bg-${colors[1]}-500`); 
+  lessormore.classList.add(`bg-${colors[0]}-500`); 
 
-  // Trigger animation on text
+  leftDiv.classList.remove(`hover:border-${colors[1]}-500`)
+  leftDiv.classList.add(`hover:border-${colors[0]}-500`)
+
+  rightDiv.classList.remove(`hover:border-${colors[1]}-500`)
+  rightDiv.classList.add(`hover:border-${colors[0]}-500`)
+
   lessormore.classList.add("fade-in-down");
 
-  // Remove animation after it's done so it can be re-triggered next time
   setTimeout(() => {
     lessormore.classList.remove("fade-in-down");
   }, 1000); // Remove animation after it finishes (1s)
