@@ -1,7 +1,13 @@
 ## Population Game
 This is a fun web-based game where players have to guess which country has a higher or lower population based on random data. The game presents two countries at a time, and you must select which one has more or less population. The goal is to score as many points as possible
 
+<img src="https://img.shields.io/badge/version-0.0.3-blue">
+
 Site: https://cycno.is-a.dev/Population-Game
+
+Changelog (0.0.3)
+- [x] added theme
+- [x] organize little bit of code 
 
 Bug Fixes in (0.0.2)
 - [x] Make everything Client Side (No Fetching)
@@ -10,9 +16,6 @@ Bug Fixes in (0.0.2)
 
 Bug Need To Be Fix:
 - [ ] Label dont properly allign to center when running the website for the first time on smaller devices
-
-Future Work:
-- [ ] Need entire rewrite of js side for optimize and organize the code
 
 if you got any issue or suggestion, open an issue.
 

@@ -2,8 +2,19 @@ let countriesDataCache = null;
 let populationDataCache = null;
 
 const countData = window.flagData;
-
 const popData = window.populationData;
+
+const leftDiv = document.getElementById("left");
+const rightDiv = document.getElementById("right");
+const pointsDiv = document.getElementById("points");
+const lessormore = document.getElementById("lessOrMore");
+const finalScore = document.getElementById("finalScore");
+const closeModalButton = document.getElementById("closeModal");
+
+let currentPopulationData = null;
+
+let right = null;
+let left = null;
 
 function updateCard(cardId, name, flagSrc, year) {
   // Get the flag image element
@@ -99,19 +110,6 @@ function reRunAnimation(div) {
   }
 }
 
-// Select the divs using their IDs
-const leftDiv = document.getElementById("left");
-const rightDiv = document.getElementById("right");
-const pointsDiv = document.getElementById("points");
-const lessormore = document.getElementById("lessOrMore");
-const finalScore = document.getElementById("finalScore");
-const closeModalButton = document.getElementById("closeModal");
-
-let currentPopulationData = null;
-
-let right = null;
-let left = null;
-
 async function init(div) {
   await getRandomPopulationWithFlag().then((countryData) => {
     if (div === leftDiv) {
@@ -143,47 +141,27 @@ let gameMode = getRandomGameMode(); // Randomly select the initial game mode
 
 const colors = ["blue","green"] // 0 identify less color theme, 1 identify more color theme
 
-function more() {
-  lessormore.innerHTML = 'Which Country Has More Population';
+function afterClick(gamemode) {
+  const isMore = gamemode === "more";
 
-  gameMode = "more";
+  lessormore.innerHTML = `Which Country Has ${isMore ? "More" : "Less"} Population`;
 
-  lessormore.classList.remove(`bg-${colors[0]}-500`); 
-  lessormore.classList.add(`bg-${colors[1]}-500`); 
-  // change the border
-  leftDiv.classList.remove(`hover:border-${colors[0]}-500`)
-  leftDiv.classList.add(`hover:border-${colors[1]}-500`)
+  lessormore.classList.remove(`bg-${isMore ? colors[0] : colors[1]}-500`); 
+  lessormore.classList.add(`bg-${isMore ? colors[1] : colors[0]}-500`); 
 
-  rightDiv.classList.remove(`hover:border-${colors[0]}-500`)
-  rightDiv.classList.add(`hover:border-${colors[1]}-500`)
-  // Trigger animation on text
-  lessormore.classList.add("fade-in-down");
+  leftDiv.classList.remove(`hover:border-${isMore ? colors[0] : colors[1]}-500`);
+  leftDiv.classList.add(`hover:border-${isMore ? colors[1] : colors[0]}-500`);
 
-  // Remove animation after it's done so it can be re-triggered next time
-  setTimeout(() => {
-    lessormore.classList.remove("fade-in-down");
-  }, 1000); // Remove animation after it finishes (1s)
-}
-
-function less() {
-  lessormore.innerHTML = 'Which Country Has Less Population';
-  gameMode = "less";
-
-  lessormore.classList.remove(`bg-${colors[1]}-500`); 
-  lessormore.classList.add(`bg-${colors[0]}-500`); 
-
-  leftDiv.classList.remove(`hover:border-${colors[1]}-500`)
-  leftDiv.classList.add(`hover:border-${colors[0]}-500`)
-
-  rightDiv.classList.remove(`hover:border-${colors[1]}-500`)
-  rightDiv.classList.add(`hover:border-${colors[0]}-500`)
+  rightDiv.classList.remove(`hover:border-${isMore ? colors[0] : colors[1]}-500`);
+  rightDiv.classList.add(`hover:border-${isMore ? colors[1] : colors[0]}-500`);
 
   lessormore.classList.add("fade-in-down");
 
   setTimeout(() => {
     lessormore.classList.remove("fade-in-down");
-  }, 1000); // Remove animation after it finishes (1s)
+  }, 1000);
 }
+
 
 function getRandomGameMode() {
   return Math.random() < 0.5 ? "more" : "less";
@@ -191,10 +169,11 @@ function getRandomGameMode() {
 
 function main() {
   var points = 0;
-  if (gameMode == "more") {
-    more()
+  
+  if (gameMode === "more") {
+    afterClick("more");
   } else {
-    less()
+    afterClick("less")
   }
 
   leftDiv.addEventListener("click", () => {
@@ -214,9 +193,9 @@ function main() {
       pointsDiv.textContent = `POINTS: ${points}`;
       gameMode = getRandomGameMode(); // Randomly switch game mode after each correct answer
       if (gameMode === "more") {
-        more();
+        afterClick("more");
       } else {
-        less();
+        afterClick("less")
       }
     } else {
       finalScore.textContent = points;
@@ -243,10 +222,9 @@ function main() {
       pointsDiv.textContent = `POINTS: ${points}`;
       gameMode = getRandomGameMode(); // Randomly switch game mode after each correct answer
       if (gameMode === "more") {
-        more();
-        // Show modal with points
+        afterClick("more");
       } else {
-        less();
+        afterClick("less")
       }
     } else {
       finalScore.textContent = points;
